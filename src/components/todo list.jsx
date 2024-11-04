@@ -1,28 +1,14 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import todo_icon from '../assets/todo_icon.png'
 import Todoitems from './Todoitems'
 
 const Todo = () => {
-const[todolist,settodolist]= useState([]);
 const inputRef=useRef();
 const add =() =>{ 
  
-    const inputText=inputRef.current.value.trim();
-    if (inputText==="") {
-      return null;
-    }
-    const newTodo={
-      id:Date.now(),
-      text:inputText,
-      isComplete:false,
-    }
-    settodolist((prev)=> [...prev, newTodo]);
-    inputRef.current.value="";
+    const inputText=inputRef.current.value;
+    console.log(inputText);
 }
-const deleteTodo=(id)=>{
-  settodolist((prvTodos)=>{ return prvTodos.filter((todo)=>todo.id !==id)})
-}
-
   return (
     <div className='bg-white place-self-center w-11/12 max-w-md flex flex-col p-7 min-h-[550px] rounded-xl'>
         <div className='flex items-center mt-7 gap-2'> <img className='w-8' src={todo_icon } alt=""/>
@@ -34,11 +20,8 @@ const deleteTodo=(id)=>{
     <button onClick={add} className='border-none rounded-full bg-orange-600 w-32 h-14 text-white text-lg font-medium cursor-pointer'>ADD+</button>
     </div>
 
-    <div>
-      {todolist.map((item,index)=>{
-      return <Todoitems key={index} text={item.text} id={item.id} isComplete={item.isComplete} deleteTodo={deleteTodo}/>
-      })}
-      
+    <div> <Todoitems text="Learn coding"/>
+    <Todoitems text="Learn coding from GreatStack"/> 
     </div>
 
     </div>
